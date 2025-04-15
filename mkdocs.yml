@@ -1,6 +1,6 @@
 site_name: Robot Documentation
 nav:
-- TL;DR: TL;DR.md
+- TL;DR: TLDR.md
 - Getting Started: GettingStarted.md
 - Whitepaper: Whitepaper.md
 - Developers: Developers.md
@@ -19,3 +19,6 @@ markdown_extensions:
 - toc:
     permalink: true
     toc_depth: 3
+
+extra_files:
+ - docs/_headers
