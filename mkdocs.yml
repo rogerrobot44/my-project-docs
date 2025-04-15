@@ -1,0 +1,21 @@
+site_name: Robot Documentation
+nav:
+- TL;DR: TL;DR.md
+- Getting Started: GettingStarted.md
+- Whitepaper: Whitepaper.md
+- Developers: Developers.md
+- Research: Research.md
+- Vision: Vision.md
+theme:
+ name: material
+ features:
+ - navigation.sections       # (optional, side nav sections)
+ - navigation.tabs          # top-level tabs (optional)
+ - navigation.tracking
+ - toc.integrate             # ✅ embeds TOC in right pane with collapse
+ - toc.follow                # ✅ highlights current section in TOC
+
+markdown_extensions:
+- toc:
+    permalink: true
+    toc_depth: 3

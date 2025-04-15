@@ -1,0 +1,782 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.11">
+    
+    
+      
+        <title>Brian and Berk Implementation Suggestions - Robot Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../../assets/stylesheets/main.4af4bdda.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#brian-and-berk-implementation-suggestions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../../.." title="Robot Documentation" class="md-header__button md-logo" aria-label="Robot Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Robot Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Brian and Berk Implementation Suggestions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../../../TL%3BDR/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  TL;DR
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../../../GettingStarted.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../../../Whitepaper/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Whitepaper
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../../../Developers/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Developers
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../../../Research/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Research
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../../../Vision/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Vision
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../../.." title="Robot Documentation" class="md-nav__button md-logo" aria-label="Robot Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Robot Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../TL%3BDR/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TL;DR
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../GettingStarted.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Whitepaper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Whitepaper
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Developers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Developers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Research/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Research
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../../Vision/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vision
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="brian-and-berk-implementation-suggestions">Brian and Berk Implementation Suggestions<a class="headerlink" href="#brian-and-berk-implementation-suggestions" title="Permanent link">&para;</a></h1>
+<h1 id="robot-network-testnet-smart-contracts-final-rollout-list"><strong>Robot Network Testnet Smart Contracts - Final Rollout List</strong><a class="headerlink" href="#robot-network-testnet-smart-contracts-final-rollout-list" title="Permanent link">&para;</a></h1>
+<h2 id="ranking-criteria"><strong>Ranking Criteria</strong><a class="headerlink" href="#ranking-criteria" title="Permanent link">&para;</a></h2>
+<p>Each smart contract was ranked based on:</p>
+<ol>
+<li><strong>Essential DeFi &amp; Execution Primitives (40%)</strong><ul>
+<li>These contracts are <strong>the foundation</strong> of the testnet.</li>
+<li><strong>Must-have</strong> for swaps, liquidity, staking, and token interactions.</li>
+</ul>
+</li>
+<li><strong>User-Facing &amp; NLP Execution (35%)</strong><ul>
+<li>Must <strong>execute transactions based on user input</strong>.</li>
+<li>Supports <strong>"Ask-Execute" style commands via NLP.</strong></li>
+</ul>
+</li>
+<li><strong>Low Infra Complexity (15%)</strong><ul>
+<li>Must be <strong>deployable without bridges, external validators, or multi-chain infra.</strong></li>
+<li><strong>Easy to integrate and test</strong> on a single chain.</li>
+</ul>
+</li>
+<li><strong>High-Impact for Testnet Users (10%)</strong><ul>
+<li>Contracts should be <strong>engaging, interactive, and demonstrate real functionality</strong>.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="top-10-smart-contracts-for-robot-testnet"><strong>🚀 Top 10 Smart Contracts for Robot Testnet</strong><a class="headerlink" href="#top-10-smart-contracts-for-robot-testnet" title="Permanent link">&para;</a></h2>
+<p>These <strong>must</strong> be deployed for the <strong>testnet launch</strong>.</p>
+<h3 id="1-dex-swap-contract-amm"><strong>1. DEX Swap Contract (AMM)</strong><a class="headerlink" href="#1-dex-swap-contract-amm" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Core DeFi contract</strong> enabling <strong>token swaps</strong>.</li>
+<li>Supports <strong>NLP-driven trades</strong> (e.g., “Swap 10 ROBOT for USDC”).</li>
+<li><strong>Foundation</strong> for liquidity providers and price discovery.</li>
+</ul>
+<h3 id="2-liquidity-pool-contract"><strong>2. Liquidity Pool Contract</strong><a class="headerlink" href="#2-liquidity-pool-contract" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Allows users to deposit &amp; withdraw liquidity.</strong></li>
+<li>Provides LP rewards &amp; fees.</li>
+<li><strong>Essential for DEX operations &amp; liquidity routing.</strong></li>
+<li>NLP: “Provide 100 USDC &amp; 100 ROBOT to the liquidity pool.”</li>
+</ul>
+<h3 id="3-limit-order-contract"><strong>3. Limit Order Contract</strong><a class="headerlink" href="#3-limit-order-contract" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Allows users to place limit orders on testnet DEX.</strong></li>
+<li>Executes <strong>trades when price conditions are met.</strong></li>
+<li>NLP: “Buy 100 ROBOT if price hits $1.50.”</li>
+</ul>
+<h3 id="4-staking-contract"><strong>4. Staking Contract</strong><a class="headerlink" href="#4-staking-contract" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Users can stake ROBOT tokens for rewards.</strong></li>
+<li>Implements <strong>fixed &amp; flexible staking durations.</strong></li>
+<li>NLP: “Stake 500 ROBOT for 30 days.”</li>
+</ul>
+<h3 id="5-yield-farming-contract"><strong>5. Yield Farming Contract</strong><a class="headerlink" href="#5-yield-farming-contract" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Users stake LP tokens to earn rewards.</strong></li>
+<li>Helps boost <strong>liquidity depth &amp; market activity.</strong></li>
+<li>NLP: “Farm my LP tokens to earn rewards.”</li>
+</ul>
+<h3 id="6-airdrop-distribution-contract"><strong>6. Airdrop Distribution Contract</strong><a class="headerlink" href="#6-airdrop-distribution-contract" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Distributes testnet airdrops based on eligibility.</strong></li>
+<li>Allows <strong>users to claim rewards with a single NLP command.</strong></li>
+<li>NLP: “Claim my airdrop.”</li>
+</ul>
+<h3 id="7-escrow-contract"><strong>7. Escrow Contract</strong><a class="headerlink" href="#7-escrow-contract" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Allows trustless, conditional transfers.</strong></li>
+<li>Assets <strong>only release when conditions are met.</strong></li>
+<li>NLP: “Send 1000 USDC to Alice if she sends 10 ETH.”</li>
+</ul>
+<h3 id="8-loan-collateral-contract"><strong>8. Loan &amp; Collateral Contract</strong><a class="headerlink" href="#8-loan-collateral-contract" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Enables lending &amp; borrowing on testnet.</strong></li>
+<li>Uses <strong>collateralized loan mechanics</strong> (e.g., 150% overcollateralization).</li>
+<li>NLP: “Borrow 500 USDC using 2 ETH as collateral.”</li>
+</ul>
+<h3 id="9-token-minting-contract"><strong>9. Token Minting Contract</strong><a class="headerlink" href="#9-token-minting-contract" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Mints new testnet tokens for use in the ecosystem.</strong></li>
+<li>NLP: “Mint 1000 TestROBOT tokens.”</li>
+</ul>
+<h3 id="10-governance-proposal-voting-contract"><strong>10. Governance Proposal &amp; Voting Contract</strong><a class="headerlink" href="#10-governance-proposal-voting-contract" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Allows testnet governance participation.</strong></li>
+<li>Users can <strong>vote on proposals using NLP.</strong></li>
+<li>NLP: “Vote yes on Proposal #3.”</li>
+</ul>
+<hr />
+<h1 id="robot-network-testnet-example-nlp-commands-for-top-10-smart-contracts"><strong>Robot Network Testnet - Example NLP Commands for Top 10 Smart Contracts</strong><a class="headerlink" href="#robot-network-testnet-example-nlp-commands-for-top-10-smart-contracts" title="Permanent link">&para;</a></h1>
+<p>Below are <strong>three example prompts</strong> for <strong>each smart contract</strong> to demonstrate how users would interact using <strong>natural language queries</strong>.</p>
+<hr />
+<h2 id="1-dex-swap-contract-amm_1"><strong>1. DEX Swap Contract (AMM)</strong><a class="headerlink" href="#1-dex-swap-contract-amm_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>“Swap 100 USDC for ROBOT tokens.”</strong></li>
+<li><strong>“Convert 2 ETH to USDT at the best available rate.”</strong></li>
+<li><strong>“Trade 500 ROBOT for AVAX but only if the price is above $1.20.”</strong></li>
+</ul>
+<hr />
+<h2 id="2-liquidity-pool-contract_1"><strong>2. Liquidity Pool Contract</strong><a class="headerlink" href="#2-liquidity-pool-contract_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>“Provide 1000 USDC and 1000 ROBOT to the liquidity pool.”</strong></li>
+<li><strong>“Remove my liquidity from the ROBOT/USDC pool.”</strong></li>
+<li><strong>“How much liquidity do I have staked in the ETH/ROBOT pool?”</strong></li>
+</ul>
+<hr />
+<h2 id="3-limit-order-contract_1"><strong>3. Limit Order Contract</strong><a class="headerlink" href="#3-limit-order-contract_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>“Buy 500 ROBOT if the price drops to $1.50.”</strong></li>
+<li><strong>“Sell 200 AVAX when the price reaches $100.”</strong></li>
+<li><strong>“Cancel my open limit order for ETH.”</strong></li>
+</ul>
+<hr />
+<h2 id="4-staking-contract_1"><strong>4. Staking Contract</strong><a class="headerlink" href="#4-staking-contract_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>“Stake 1000 ROBOT for 30 days.”</strong></li>
+<li><strong>“Unstake my ROBOT tokens now.”</strong></li>
+<li><strong>“How much staking reward have I earned?”</strong></li>
+</ul>
+<hr />
+<h2 id="5-yield-farming-contract_1"><strong>5. Yield Farming Contract</strong><a class="headerlink" href="#5-yield-farming-contract_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>“Farm my LP tokens to earn rewards.”</strong></li>
+<li><strong>“Check my farming rewards for the ROBOT/USDC pool.”</strong></li>
+<li><strong>“Withdraw my earned yield from the farming pool.”</strong></li>
+</ul>
+<hr />
+<h2 id="6-airdrop-distribution-contract_1"><strong>6. Airdrop Distribution Contract</strong><a class="headerlink" href="#6-airdrop-distribution-contract_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>“Claim my airdrop rewards.”</strong></li>
+<li><strong>“Am I eligible for the next ROBOT airdrop?”</strong></li>
+<li><strong>“How many airdrop tokens have I received so far?”</strong></li>
+</ul>
+<hr />
+<h2 id="7-escrow-contract_1"><strong>7. Escrow Contract</strong><a class="headerlink" href="#7-escrow-contract_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>“Hold 500 USDC in escrow until Bob deposits 100 ROBOT.”</strong></li>
+<li><strong>“Release my escrowed funds to Alice now.”</strong></li>
+<li><strong>“What are the conditions for my active escrow transaction?”</strong></li>
+</ul>
+<hr />
+<h2 id="8-loan-collateral-contract_1"><strong>8. Loan &amp; Collateral Contract</strong><a class="headerlink" href="#8-loan-collateral-contract_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>“Borrow 1000 USDC using my 2 ETH as collateral.”</strong></li>
+<li><strong>“Repay my outstanding loan for USDC.”</strong></li>
+<li><strong>“Check my collateral ratio for my active loan.”</strong></li>
+</ul>
+<hr />
+<h2 id="9-token-minting-contract_1"><strong>9. Token Minting Contract</strong><a class="headerlink" href="#9-token-minting-contract_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>“Mint 5000 TestROBOT tokens for my testnet project.”</strong></li>
+<li><strong>“How many TestROBOT tokens have been minted so far?”</strong></li>
+<li><strong>“Burn 1000 of my TestROBOT tokens.”</strong></li>
+</ul>
+<hr />
+<h2 id="10-governance-proposal-voting-contract_1"><strong>10. Governance Proposal &amp; Voting Contract</strong><a class="headerlink" href="#10-governance-proposal-voting-contract_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>“Create a proposal to increase staking rewards to 10%.”</strong></li>
+<li><strong>“Vote yes on Proposal #3.”</strong></li>
+<li><strong>“What are the active governance proposals?”</strong></li>
+</ul>
+<hr />
+<h2 id="summary"><strong>🔍 Summary</strong><a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>✅ <strong>Each example prompt directly interacts with a deployed smart contract.</strong></p>
+<p>✅ <strong>Commands are structured as clear, executable NLP queries.</strong></p>
+<p>✅ <strong>Users can ask, check, execute, and track on-chain actions seamlessly.</strong></p>
+<p>🚀 <strong>Result: A powerful, intuitive NLP-driven testnet experience for DeFi &amp; automation.</strong></p>
+<hr />
+<h2 id="secondary-smart-contracts-11-20"><strong>⚡ Secondary Smart Contracts (11-20)</strong><a class="headerlink" href="#secondary-smart-contracts-11-20" title="Permanent link">&para;</a></h2>
+<p>These <strong>add depth</strong> but <strong>aren't essential for testnet launch</strong>.</p>
+<ol>
+<li><strong>Token Vesting Contract</strong> – Locks tokens for vesting periods.</li>
+<li><strong>Airdrop Eligibility Contract</strong> – Checks user <strong>eligibility for airdrops.</strong></li>
+<li><strong>Multi-Sig Wallet Contract</strong> – Requires <strong>multiple signatures for transactions.</strong></li>
+<li><strong>NFT Minting &amp; Auction Contract</strong> – Allows <strong>minting &amp; auctioning of NFTs.</strong></li>
+<li><strong>NFT Royalties Contract</strong> – Enforces <strong>royalty payments for NFT creators.</strong></li>
+<li><strong>Perpetual Futures Smart Contract</strong> – Enables <strong>perp trading with leverage.</strong></li>
+<li><strong>Fee Management Contract</strong> – <strong>Optimizes gas &amp; transaction costs.</strong></li>
+<li><strong>Dynamic Liquidity Rebalancing Contract</strong> – <strong>Auto-balances LP positions.</strong></li>
+<li><strong>Flash Loan Contract</strong> – Allows <strong>zero-collateralized loans for advanced traders.</strong></li>
+<li><strong>Cross-Contract Execution Router</strong> – <strong>Allows one contract to execute multiple steps.</strong></li>
+</ol>
+<hr />
+<h2 id="excluded-contracts-too-complex-or-not-needed-for-testnet"><strong>❌ Excluded Contracts (Too Complex or Not Needed for Testnet)</strong><a class="headerlink" href="#excluded-contracts-too-complex-or-not-needed-for-testnet" title="Permanent link">&para;</a></h2>
+<p>These were <strong>removed</strong> due to <strong>high complexity or low relevance to testnet</strong>:</p>
+<ul>
+<li>❌ <strong>Cross-Chain Bridge Contracts</strong> – Not needed for testnet.</li>
+<li>❌ <strong>Cross-Chain Liquidity Contracts</strong> – Requires <strong>external integrations.</strong></li>
+<li>❌ <strong>Validator Staking Contracts</strong> – Staking infra is <strong>not required for testnet.</strong></li>
+<li>❌ <strong>GPU Rental Contracts</strong> – More relevant for <strong>AI &amp; compute use cases.</strong></li>
+<li>❌ <strong>Sports Betting Contracts</strong> – <strong>Not aligned with testnet goals.</strong></li>
+<li>❌ <strong>Social Graph Contracts</strong> – Not needed for a <strong>financial testnet.</strong></li>
+<li>❌ <strong>Custodial Wallet Contracts</strong> – More relevant for <strong>institutional use cases.</strong></li>
+<li>❌ <strong>On-Chain Royalty Enforcement Contracts</strong> – Low priority for testnet.</li>
+</ul>
+<hr />
+<h2 id="summary_1"><strong>🔍 Summary</strong><a class="headerlink" href="#summary_1" title="Permanent link">&para;</a></h2>
+<p>✅ <strong>Only smart contracts that execute real on-chain actions are included.</strong></p>
+<p>✅ <strong>Every contract is deployable in testnet with minimal infra dependencies.</strong></p>
+<p>✅ <strong>No unnecessary governance, staking infra, or cross-chain complexity.</strong></p>
+<p>🚀 <strong>Result: A lean, high-impact testnet that proves Robot Network’s DeFi automation &amp; NLP execution.</strong></p>
+<hr />
+<h2 id="appendix">Appendix<a class="headerlink" href="#appendix" title="Permanent link">&para;</a></h2>
+<h2 id="top-priorities-1-10-must-have-primitives"><strong>🚀 Top Priorities (1-10) - Must-Have Primitives</strong><a class="headerlink" href="#top-priorities-1-10-must-have-primitives" title="Permanent link">&para;</a></h2>
+<p>These are the <strong>most critical</strong> primitives to <strong>demonstrate NLP orchestration</strong> and ensure a <strong>smooth testnet launch</strong>.</p>
+<ol>
+<li><strong>Natural Language Smart Contract Data Structure</strong> – <strong>Core backbone</strong>, enables NLP-based queries.</li>
+<li><strong>Smart Execution Contracts</strong> – Automates <strong>actions based on NLP inputs</strong>.</li>
+<li><strong>DEX Order Books</strong> – Enables <strong>NLP-driven trading interactions</strong>.</li>
+<li><strong>Arbitrage Scanners &amp; Price Aggregators</strong> – NLP-based <strong>trade intelligence</strong>.</li>
+<li><strong>Liquidity Pools</strong> – Foundation for <strong>swaps &amp; DeFi</strong>.</li>
+<li><strong>Front-Running Detectors</strong> – <strong>Security layer</strong> for traders.</li>
+<li><strong>Token Launch Monitors</strong> – Tracks <strong>new token listings</strong> via NLP.</li>
+<li><strong>Yield Aggregators</strong> – <strong>NLP-based yield optimization</strong>.</li>
+<li><strong>Airdrop Tracking &amp; Distribution Contracts</strong> – Boosts <strong>engagement &amp; rewards</strong>.</li>
+<li><strong>Wallet Activity Indexes</strong> – <strong>Tracks transactions via NLP</strong>.</li>
+</ol>
+<hr />
+<h2 id="secondary-priorities-11-20-enhancing-the-experience"><strong>⚡ Secondary Priorities (11-20) - Enhancing the Experience</strong><a class="headerlink" href="#secondary-priorities-11-20-enhancing-the-experience" title="Permanent link">&para;</a></h2>
+<p>These <strong>add depth</strong> to testnet but <strong>aren't essential for launch</strong>.</p>
+<ol>
+<li><strong>Liquidation Monitoring Systems</strong> – NLP alerts for <strong>liquidation risk</strong>.</li>
+<li><strong>Gas Optimization Tools</strong> – NLP-based <strong>fee reduction suggestions</strong>.</li>
+<li><strong>Historical Transaction Logs</strong> – NLP queries for <strong>past blockchain events</strong>.</li>
+<li><strong>Protocol Metrics &amp; Analytics</strong> – Monitors <strong>testnet stats via NLP</strong>.</li>
+<li><strong>Transaction Optimizers</strong> – NLP-powered <strong>trade execution efficiency</strong>.</li>
+<li><strong>NFT Marketplaces &amp; Auction Systems</strong> – Enables <strong>NLP-driven NFT trading</strong>.</li>
+<li><strong>NFT Floor Price Indexers</strong> – NLP queries for <strong>NFT values</strong>.</li>
+<li><strong>NFT Rarity Engines</strong> – NLP-based <strong>rarity detection</strong> for NFTs.</li>
+<li><strong>Token-Gated Access Control</strong> – NLP-based <strong>wallet access management</strong>.</li>
+<li><strong>On-Chain Reputation Systems</strong> – NLP-powered <strong>wallet reputation tracking</strong>.</li>
+</ol>
+<hr />
+<h2 id="tertiary-priorities-21-30-lower-impact-but-nice-to-have"><strong>🛠️ Tertiary Priorities (21-30) - Lower Impact but Nice to Have</strong><a class="headerlink" href="#tertiary-priorities-21-30-lower-impact-but-nice-to-have" title="Permanent link">&para;</a></h2>
+<p>These <strong>add functionality but won’t significantly impact</strong> testnet engagement.</p>
+<ol>
+<li><strong>Social Graph &amp; Interest Matching Systems</strong> – NLP-driven <strong>wallet discovery</strong>.</li>
+<li><strong>Airdrop Eligibility Predictors</strong> – NLP-based <strong>eligibility checking</strong>.</li>
+<li><strong>Airdrop Redemption &amp; Swap Contracts</strong> – Enables <strong>automated airdrop claims</strong>.</li>
+<li><strong>NFT Royalties &amp; Revenue Sharing Contracts</strong> – NLP-powered <strong>royalty tracking</strong>.</li>
+<li><strong>Named User Wallets</strong> – NLP-friendly <strong>wallet naming</strong>.</li>
+<li><strong>Wallet Messaging Policy Contracts</strong> – Enables <strong>wallet-based messaging</strong>.</li>
+<li><strong>Escrow Contracts</strong> – NLP-driven <strong>conditional transactions</strong>.</li>
+<li><strong>DAO Rewards &amp; Airdrop Systems</strong> – NLP-based <strong>DAO reward tracking</strong>.</li>
+<li><strong>Perpetual Futures Smart Contracts</strong> – NLP-driven <strong>derivatives trading insights</strong>.</li>
+<li><strong>Compute Power Auctions</strong> – NLP-based <strong>compute rental marketplace</strong>.</li>
+</ol>
+<hr />
+<h2 id="excluded-for-testnet-too-complex-or-unnecessary"><strong>❌ Excluded for Testnet (Too Complex or Unnecessary)</strong><a class="headerlink" href="#excluded-for-testnet-too-complex-or-unnecessary" title="Permanent link">&para;</a></h2>
+<p>These were <strong>not included</strong> due to <strong>high complexity or low immediate utility</strong>:</p>
+<ul>
+<li><strong>Cross-Chain Bridges</strong> – Requires <strong>external infra</strong>; not needed for testnet.</li>
+<li><strong>Cross-Chain Liquidity Pools</strong> – Adds <strong>unnecessary complexity</strong>.</li>
+<li><strong>Governance Voting &amp; Proposal Contracts</strong> – Governance isn't <strong>testnet-relevant</strong>.</li>
+<li><strong>Delegation Contracts</strong> – <strong>Not essential for initial testnet testing</strong>.</li>
+<li><strong>Validator Incentive Contracts</strong> – Staking <strong>not needed</strong> for testnet.</li>
+<li><strong>GPU Rental Marketplaces</strong> – Infra <strong>too advanced for testnet phase</strong>.</li>
+<li><strong>Sports Betting Markets</strong> – <strong>Niche use case</strong>, better for mainnet.</li>
+<li><strong>On-Chain Royalty Enforcement</strong> – Low impact for <strong>testnet launch</strong>.</li>
+<li><strong>Custodial Smart Contracts</strong> – More relevant for <strong>institutional users</strong>.</li>
+<li><strong>Network Fee Management Contracts</strong> – <strong>Optimization tool, not testnet-critical</strong>.</li>
+</ul>
+<hr />
+<h2 id="summary_2"><strong>🔍 Summary</strong><a class="headerlink" href="#summary_2" title="Permanent link">&para;</a></h2>
+<p>✅ <strong>Fastest-to-build primitives were prioritized.</strong></p>
+<p>✅ <strong>Features that best showcase NLP execution took precedence.</strong></p>
+<p>✅ <strong>Excluded governance, staking, and complex infra to avoid delays.</strong></p>
+<p>🚀 <strong>Result: A lean, high-impact testnet that immediately demonstrates Robot Network’s power.</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../../../..", "features": ["navigation.sections", "navigation.tabs", "navigation.tracking", "toc.integrate", "toc.follow"], "search": "../../../../../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
